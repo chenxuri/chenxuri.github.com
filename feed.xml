@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cxr Blog</title>
+    <description>Java工程师 | 这里是 @Cxr陈旭日 的个人博客，与你一起发现更大的世界。</description>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Mon, 16 Oct 2017 22:35:43 +0800</pubDate>
+    <lastBuildDate>Mon, 16 Oct 2017 22:35:43 +0800</lastBuildDate>
+    <generator>Jekyll v3.6.0</generator>
+    
+      <item>
+        <title>Welcome to Cxr Blog</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;“Yeah It’s on. ”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;前言&quot;&gt;前言&lt;/h2&gt;
+
+&lt;p&gt;很久前就想搭建一个自己的网站，想想在上面可以自由编写喜欢的东西，感觉会很有趣。这次趁着国庆放假，开始动起手来。
+搭建过程还算顺利，同时也学到了点新知识，总体还算满意。以后会更新些Java相关博客。或许也会添加些其它有意思的小东西，敬请期待！&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;正文&quot;&gt;正文&lt;/h2&gt;
+&lt;p&gt;下面谈下该网站搭建细节
+要搭建一个网站，你需要 服务器+博客代码+域名&lt;/p&gt;
+&lt;h4 id=&quot;服务器&quot;&gt;服务器&lt;/h4&gt;
+&lt;p&gt;一般来说都使用云服务器，可以从阿里云和腾讯云购买。也许有人会问了，有免费的云服务器吗？有，并且十分好用，就是GitHub。
+GitHub是最大的代码托管网站。可以把项目代码上传到GitHub,通过GitHub Pages发布公开网页。具体流程参考这里&lt;a href=&quot;https://pages.github.com&quot;&gt;https://pages.github.com&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;博客代码&quot;&gt;博客代码&lt;/h4&gt;
+&lt;p&gt;Jekyll是个好用的博客生成工具，并且支持Markdown。
+（未完待续。。。）&lt;/p&gt;
+
+&lt;p&gt;—— 陈旭日 写与 2017.10.16&lt;/p&gt;
+</description>
+        <pubDate>Mon, 16 Oct 2017 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2017/10/16/website-2017/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/10/16/website-2017/</guid>
+        
+        <category>杂谈</category>
+        
+        
+      </item>
+    
+  </channel>
+</rss>
