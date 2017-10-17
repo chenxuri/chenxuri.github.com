@@ -5,17 +5,13 @@
     <description>Java工程师 | 这里是 @Cxr陈旭日 的个人博客，与你一起发现更大的世界。</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 16 Oct 2017 23:00:03 +0800</pubDate>
-    <lastBuildDate>Mon, 16 Oct 2017 23:00:03 +0800</lastBuildDate>
+    <pubDate>Tue, 17 Oct 2017 20:54:24 +0800</pubDate>
+    <lastBuildDate>Tue, 17 Oct 2017 20:54:24 +0800</lastBuildDate>
     <generator>Jekyll v3.6.0</generator>
     
       <item>
         <title>Welcome to Cxr Blog</title>
-        <description>&lt;blockquote&gt;
-  &lt;p&gt;“Yeah It’s on. ”&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;前言&quot;&gt;前言&lt;/h2&gt;
+        <description>&lt;h2 id=&quot;前言&quot;&gt;前言&lt;/h2&gt;
 
 &lt;p&gt;很久前就想搭建一个自己的网站，想想在上面可以自由编写喜欢的东西，感觉会很有趣。这次趁着国庆放假，开始动起手来。
 搭建过程还算顺利，同时也学到了点新知识，总体还算满意。以后会更新些Java相关博客。或许也会添加些其它有意思的小东西，敬请期待！&lt;/p&gt;
@@ -33,7 +29,6 @@ GitHub是最大的代码托管网站。可以把项目代码上传到GitHub,通�
 &lt;p&gt;Jekyll是个好用的博客生成工具，并且支持Markdown。
 （未完待续。。。）&lt;/p&gt;
 
-&lt;p&gt;—— 陈旭日 写与 2017.10.16&lt;/p&gt;
 </description>
         <pubDate>Mon, 16 Oct 2017 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/2017/10/16/website-2017/</link>
