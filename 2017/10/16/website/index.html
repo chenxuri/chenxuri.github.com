@@ -12,7 +12,7 @@
 
     <title>Welcome to Cxr Blog - 陈旭日的博客 | Cxr</title>
 
-    <link rel="canonical" href="http://localhost:4000/2017/10/16/website-2017/">
+    <link rel="canonical" href="http://localhost:4000/2017/10/16/website/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -188,14 +188,62 @@
 <h2 id="正文">正文</h2>
 <p>下面谈下该网站搭建细节
 要搭建一个网站，你需要 服务器+博客代码+域名</p>
-<h4 id="服务器">服务器</h4>
+
+<h3 id="服务器">服务器</h3>
 <p>一般来说都使用云服务器，可以从阿里云和腾讯云购买。也许有人会问了，有免费的云服务器吗？有，并且十分好用，就是GitHub。
-GitHub是最大的代码托管网站。可以把项目代码上传到GitHub,通过GitHub Pages发布公开网页。具体流程参考这里<a href="https://pages.github.com">https://pages.github.com</a></p>
+GitHub是最大的代码托管网站，可以被用来版本控制。Github Pages 是 Github 的静态页面托管服务。它设计的初衷是为了用户能够直接通过 Github 仓库来托管用户个人、组织或是项目的专属页面。
+首先在GitHub上创建一个项目，不过名字必须是这种格式xxx(比如名字).github.io，这样会自动开启GitHub Pages的功能。其它地方与创建普通项目相同。
+对Git不熟的同学可以看下<a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000">廖雪峰的Git教程</a></p>
 
-<h4 id="博客代码">博客代码</h4>
-<p>Jekyll是个好用的博客生成工具，并且支持Markdown。
-（未完待续。。。）</p>
+<h3 id="博客代码">博客代码</h3>
+<p><a href="http://jekyll.com.cn/docs/home/">Jekyll</a>是个好用的博客框架，它支持静态网站和Markdown。Mardown是一种简单的标记语言，可移植性强，被越来越多
+的用来写博客。不熟悉Markdown的可以参考这里的<a href="http://www.jianshu.com/p/1e402922ee32/">教程</a>和<a href="https://maxiang.io">马克飞象</a>，很容易学会。</p>
 
+<h4 id="安装jekyll">安装Jekyll</h4>
+<p>安装流程为ruby -&gt; gem -&gt; Jekyll。首先我们安装ruby，Mac和Linux可以用命令行配合yum或者brew这样的包管理器很方便的安装ruby，
+Windows可以下载<a href="https://rubyinstaller.org/">Ruby installer</a>来进行安装。然后用命令行安装gem，gem是一个ruby的包管理系统。
+最后再用gem安装Jekyll。如下所示：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//在RubyGems官网上下载压缩包，解压到你的本地任意位置</span>
+
+<span class="err">$</span> <span class="n">cd</span> <span class="n">yourpath</span> <span class="n">to</span> <span class="n">rubygems</span> <span class="c1">//你解压的位置</span>
+<span class="err">$</span> <span class="n">ruby</span> <span class="n">setup</span><span class="o">.</span><span class="na">rb</span>  <span class="c1">//安装gem</span>
+<span class="err">$</span> <span class="n">gem</span> <span class="n">install</span> <span class="n">jekyll</span>
+</code></pre></div></div>
+
+<h4 id="jekyll模板">Jekyll模板</h4>
+<p>推荐如下模板：</p>
+<ul>
+  <li><a href="http://jekyllthemes.org/">Jekyll Themes</a> jekyll的模板网站，可以找到各式各样你喜欢的模板。</li>
+  <li><a href="https://github.com/huxpro/huxpro.github.io/">Hux Blog</a> 黄轩的博客，样式也比较好看。</li>
+</ul>
+
+<p>博客目录大概如下图所示</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">|</span><span class="err">──</span> <span class="n">_includes</span>  <span class="c1">//页首页尾模块</span>
+<span class="o">|</span>   <span class="err">├──</span> <span class="n">footer</span><span class="o">.</span><span class="na">html</span>
+<span class="o">|</span>   <span class="err">└──</span> <span class="n">header</span><span class="o">.</span><span class="na">html</span>
+<span class="o">|</span>
+<span class="o">|</span><span class="err">──</span> <span class="n">_layouts</span>   <span class="c1">//页面布局</span>
+<span class="o">|</span>   <span class="err">├──</span> <span class="k">default</span><span class="o">.</span><span class="na">html</span>
+<span class="o">|</span>   <span class="err">└──</span> <span class="n">post</span><span class="o">.</span><span class="na">html</span>
+<span class="o">|</span>
+<span class="o">|</span><span class="err">──</span> <span class="n">_posts</span>     <span class="c1">//博客文件</span>
+<span class="o">|</span>   <span class="err">├──</span> <span class="mi">20017</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">29</span><span class="o">-</span><span class="n">why</span><span class="o">-</span><span class="n">every</span><span class="o">-</span><span class="n">programmer</span><span class="o">-</span><span class="n">should</span><span class="o">-</span><span class="n">play</span><span class="o">-</span><span class="n">nethack</span><span class="o">.</span><span class="na">markdown</span>
+<span class="o">|</span>   <span class="err">└──</span> <span class="mi">20017</span><span class="o">-</span><span class="mo">04</span><span class="o">-</span><span class="mi">26</span><span class="o">-</span><span class="n">barcamp</span><span class="o">-</span><span class="n">boston</span><span class="o">-</span><span class="mi">4</span><span class="o">-</span><span class="n">roundup</span><span class="o">.</span><span class="na">markdown</span>
+<span class="o">|</span>
+<span class="o">|</span><span class="err">──</span> <span class="n">_site</span>      <span class="c1">//输出目录</span>
+<span class="o">|</span>
+<span class="o">|</span><span class="err">──</span> <span class="n">index</span><span class="o">.</span><span class="na">html</span>
+</code></pre></div></div>
+
+<p>网站写好后，把_site目录下的文件上传到Github上刚建的项目里。</p>
+
+<h3 id="购买域名">购买域名</h3>
+<p>可以从阿里云或腾讯云购买域名，一般一年几十块钱。然后在github上博客项目的setting里的Github pages内绑定域名，如下图所示
+<img src="/img/in-post/20171016website/githubpages.png" alt="" />
+现在终于搭建成功了，可以好好欣赏下自己的博客。</p>
+
+<p><strong>也许搭建过程中会遇到一些问题，但多思考，多搜索，相信你能解决！</strong></p>
 
 
                 <hr>

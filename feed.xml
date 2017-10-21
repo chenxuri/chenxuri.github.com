@@ -5,8 +5,8 @@
     <description>Java工程师 | 这里是 @Cxr陈旭日 的个人博客，与你一起发现更大的世界。</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 17 Oct 2017 20:54:24 +0800</pubDate>
-    <lastBuildDate>Tue, 17 Oct 2017 20:54:24 +0800</lastBuildDate>
+    <pubDate>Sat, 21 Oct 2017 23:34:04 +0800</pubDate>
+    <lastBuildDate>Sat, 21 Oct 2017 23:34:04 +0800</lastBuildDate>
     <generator>Jekyll v3.6.0</generator>
     
       <item>
@@ -21,18 +21,66 @@
 &lt;h2 id=&quot;正文&quot;&gt;正文&lt;/h2&gt;
 &lt;p&gt;下面谈下该网站搭建细节
 要搭建一个网站，你需要 服务器+博客代码+域名&lt;/p&gt;
-&lt;h4 id=&quot;服务器&quot;&gt;服务器&lt;/h4&gt;
+
+&lt;h3 id=&quot;服务器&quot;&gt;服务器&lt;/h3&gt;
 &lt;p&gt;一般来说都使用云服务器，可以从阿里云和腾讯云购买。也许有人会问了，有免费的云服务器吗？有，并且十分好用，就是GitHub。
-GitHub是最大的代码托管网站。可以把项目代码上传到GitHub,通过GitHub Pages发布公开网页。具体流程参考这里&lt;a href=&quot;https://pages.github.com&quot;&gt;https://pages.github.com&lt;/a&gt;&lt;/p&gt;
+GitHub是最大的代码托管网站，可以被用来版本控制。Github Pages 是 Github 的静态页面托管服务。它设计的初衷是为了用户能够直接通过 Github 仓库来托管用户个人、组织或是项目的专属页面。
+首先在GitHub上创建一个项目，不过名字必须是这种格式xxx(比如名字).github.io，这样会自动开启GitHub Pages的功能。其它地方与创建普通项目相同。
+对Git不熟的同学可以看下&lt;a href=&quot;https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000&quot;&gt;廖雪峰的Git教程&lt;/a&gt;&lt;/p&gt;
 
-&lt;h4 id=&quot;博客代码&quot;&gt;博客代码&lt;/h4&gt;
-&lt;p&gt;Jekyll是个好用的博客生成工具，并且支持Markdown。
-（未完待续。。。）&lt;/p&gt;
+&lt;h3 id=&quot;博客代码&quot;&gt;博客代码&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;http://jekyll.com.cn/docs/home/&quot;&gt;Jekyll&lt;/a&gt;是个好用的博客框架，它支持静态网站和Markdown。Mardown是一种简单的标记语言，可移植性强，被越来越多
+的用来写博客。不熟悉Markdown的可以参考这里的&lt;a href=&quot;http://www.jianshu.com/p/1e402922ee32/&quot;&gt;教程&lt;/a&gt;和&lt;a href=&quot;https://maxiang.io&quot;&gt;马克飞象&lt;/a&gt;，很容易学会。&lt;/p&gt;
 
+&lt;h4 id=&quot;安装jekyll&quot;&gt;安装Jekyll&lt;/h4&gt;
+&lt;p&gt;安装流程为ruby -&amp;gt; gem -&amp;gt; Jekyll。首先我们安装ruby，Mac和Linux可以用命令行配合yum或者brew这样的包管理器很方便的安装ruby，
+Windows可以下载&lt;a href=&quot;https://rubyinstaller.org/&quot;&gt;Ruby installer&lt;/a&gt;来进行安装。然后用命令行安装gem，gem是一个ruby的包管理系统。
+最后再用gem安装Jekyll。如下所示：&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//在RubyGems官网上下载压缩包，解压到你的本地任意位置&lt;/span&gt;
+
+&lt;span class=&quot;err&quot;&gt;$&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cd&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yourpath&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rubygems&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//你解压的位置&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;$&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ruby&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;setup&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;rb&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;//安装gem&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;$&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;jekyll&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;jekyll模板&quot;&gt;Jekyll模板&lt;/h4&gt;
+&lt;p&gt;推荐如下模板：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://jekyllthemes.org/&quot;&gt;Jekyll Themes&lt;/a&gt; jekyll的模板网站，可以找到各式各样你喜欢的模板。&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/huxpro/huxpro.github.io/&quot;&gt;Hux Blog&lt;/a&gt; 黄轩的博客，样式也比较好看。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;博客目录大概如下图所示&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;──&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_includes&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;//页首页尾模块&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;   &lt;span class=&quot;err&quot;&gt;├──&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;footer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;html&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;   &lt;span class=&quot;err&quot;&gt;└──&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;header&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;html&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;──&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_layouts&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;//页面布局&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;   &lt;span class=&quot;err&quot;&gt;├──&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;html&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;   &lt;span class=&quot;err&quot;&gt;└──&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;post&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;html&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;──&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_posts&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;//博客文件&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;   &lt;span class=&quot;err&quot;&gt;├──&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;20017&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;29&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;why&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;every&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;programmer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;should&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;play&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nethack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;markdown&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;   &lt;span class=&quot;err&quot;&gt;└──&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;20017&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;04&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;26&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;barcamp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;boston&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;roundup&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;markdown&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;──&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_site&lt;/span&gt;      &lt;span class=&quot;c1&quot;&gt;//输出目录&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;──&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;html&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;网站写好后，把_site目录下的文件上传到Github上刚建的项目里。&lt;/p&gt;
+
+&lt;h3 id=&quot;购买域名&quot;&gt;购买域名&lt;/h3&gt;
+&lt;p&gt;可以从阿里云或腾讯云购买域名，一般一年几十块钱。然后在github上博客项目的setting里的Github pages内绑定域名，如下图所示
+&lt;img src=&quot;/img/in-post/20171016website/githubpages.png&quot; alt=&quot;&quot; /&gt;
+现在终于搭建成功了，可以好好欣赏下自己的博客。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;也许搭建过程中会遇到一些问题，但多思考，多搜索，相信你能解决！&lt;/strong&gt;&lt;/p&gt;
 </description>
         <pubDate>Mon, 16 Oct 2017 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2017/10/16/website-2017/</link>
-        <guid isPermaLink="true">http://localhost:4000/2017/10/16/website-2017/</guid>
+        <link>http://localhost:4000/2017/10/16/website/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/10/16/website/</guid>
         
         <category>杂谈</category>
         
