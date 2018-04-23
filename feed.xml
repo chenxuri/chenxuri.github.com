@@ -5,9 +5,133 @@
     <description>Java工程师 | 这里是 @Cxr陈旭日 的个人博客，与你一起发现更大的世界。</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sun, 24 Dec 2017 19:26:29 +0800</pubDate>
-    <lastBuildDate>Sun, 24 Dec 2017 19:26:29 +0800</lastBuildDate>
+    <pubDate>Mon, 23 Apr 2018 22:16:44 +0800</pubDate>
+    <lastBuildDate>Mon, 23 Apr 2018 22:16:44 +0800</lastBuildDate>
     <generator>Jekyll v3.6.0</generator>
+    
+      <item>
+        <title>深入理解JAVA虚拟机 - Java内存区域</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;Java与C++之间有一堵由内存动态分配和垃圾收集技术所围成的“高墙”，墙外面的人想进去，墙里面的人却想出来。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;1-运行时数据区域&quot;&gt;1. 运行时数据区域&lt;/h2&gt;
+&lt;p&gt;Java虚拟机在执行Java程序的过程中会把它所管理的内存划分为若干个不同的数据区域。
+&lt;img src=&quot;/img/in-post/20180205jvm/jvm_memory.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;11-程序计数器&quot;&gt;1.1 程序计数器&lt;/h4&gt;
+&lt;p&gt;程序计数器（Program Counter Register）是一块较小的内存空间，它可以看作是当前线程所执行的字节码的行号指示器。程序计数器是线程私有的。&lt;/p&gt;
+
+&lt;p&gt;何为线程私有？ 由于Java虚拟机的多线程是通过线程轮流切换并分配处理器执行时间的方式来实现的，在任何一个确定的时刻，一个处理器（对于多核处理器来说是一个内核）都只会执行一条线程中的指令。因此，为了线程切换后能恢复到正确的执行位置，每条线程都需要有一个独立的程序计数器，各条线程之间计数器互不影响，独立存储，我们称这类内存区域为“线程私有”的内存。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;特点：行号指示器；线程私有；并且是唯一没有OutOfMemoryError异常的区域。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;12-java虚拟机栈&quot;&gt;1.2 Java虚拟机栈&lt;/h4&gt;
+
+&lt;p&gt;虚拟机栈（Java Virtual Machine Stacks）描述的是Java方法执行的内存模型：每个方法在执行的同时都会创建一个栈帧（Stack Frame）用于存储局部变量表、操作数栈、动态链接、方法出口等信息。每一个方法从调用直至执行完成的过程，就对应着一个栈帧在虚拟机栈中入栈到出栈的过程。&lt;/p&gt;
+
+&lt;p&gt;经常有人把Java内存区分为堆内存（Heap）和栈内存（Stack），实际划分远比这复杂。这里的“栈”就是现在讲的虚拟机栈，或者说是虚拟机栈中局部变量表部分。局部变量表存放了编译期可知的各种基本数据类型（boolean、byte、char、short、int、float、long、double）、对象引用（reference类型）和returnAddress类型。&lt;/p&gt;
+
+&lt;p&gt;在Java虚拟机规范中，对这个区域规定了两种异常状况：如果线程请求的栈深度大于虚 拟机所允许的深度，将抛出StackOverflowError异常；如果虚拟机栈可以动态扩展（当前大部分的Java虚拟机都可动态扩展，只不过Java虚拟机规范中也允许固定长度的虚拟机栈），如果扩展时无法申请到足够的内存，就会抛出OutOfMemoryError异常。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;特点：描述方法的内存模型，包含局部变量表等；俗称的堆和栈中的“栈；会抛出StackOverflowError和OutOfMemoryError两种异常。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;13-本地方法栈&quot;&gt;1.3 本地方法栈&lt;/h4&gt;
+&lt;p&gt;本地方法栈（Native Method Stack）与虚拟机栈所类似，区别是虚拟机栈为虚拟机执行Java方法（也就是字节码）服务，而本地方法栈则为虚拟机使用到的Native方法服务。甚至有的虚拟机（譬如 Sun HotSpot虚拟机）直接就把本地方法栈和虚拟机栈合二为一。与虚拟机栈一样，本地方法栈区域也会抛出StackOverflowError和OutOfMemoryError异常。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;特点：和虚拟机栈类似，不过是为本地方法服务；HotSpot虚拟机中和虚拟机栈合并；抛出两种异常。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;14-java堆&quot;&gt;1.4 Java堆&lt;/h4&gt;
+
+&lt;p&gt;Java堆（Java Heap）是Java虚拟机所管理的内存中最大的一块。Java堆是被所有线程共享的一块内存区域，在虚拟机启动时创建。此内存区域的唯一目的就是存放对象实例及数组，几乎所有的对象实例都在这里分配内存。&lt;/p&gt;
+
+&lt;p&gt;Java堆是垃圾收集器管理的主要区域，因此很多时候也被称做“GC堆”（Garbage Collected Heap）。从内存回收的角度来看，由于现在收集器基本都采用分代收集算法，所以Java堆中还可以细分为：新生代和老年代；再细致一点的有Eden空间、From Survivor空间、To Survivor空间等。&lt;/p&gt;
+
+&lt;p&gt;Java堆可以处于物理上不连续的内存空间中。Java堆可以固定也可以扩展。如果在堆中没有内存完成实例分配，并且堆也无法再扩展时，将会抛出OutOfMemoryError异常。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;特点：存储对象实例；被所有线程共享，虚拟机启动时创建；垃圾收集器的主要区域；会抛出OutOfMemoryError异常。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;15-方法区&quot;&gt;1.5 方法区&lt;/h4&gt;
+
+&lt;p&gt;方法区（Method Area）与Java堆一样，是各个线程共享的内存区域，它用于存储已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。它有一个别名叫做Non-Heap（非堆）。在HotSpot中也被称为永久代。&lt;/p&gt;
+
+&lt;p&gt;这区域的内存回收目标主要是针对常量池的回收和对类型的卸载，一般来说，这个区域的回收“成绩”比较难以令人满意，尤其是类型的卸载，条件相当苛刻，但是这部分区域的回收确实是必要的。&lt;/p&gt;
+
+&lt;p&gt;当方法区无法满足内存分配需求时，将抛出OutOfMemoryError异常。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;特点：存储类信息、常量、静态变量等数据，包含运行时常量池；被所有线程共享；别称非堆，在HotSpot中也被称为永久代；会抛出OutOfMemoryError异常。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;2-hotspot虚拟机对象探秘&quot;&gt;2. HotSpot虚拟机对象探秘&lt;/h2&gt;
+&lt;h4 id=&quot;21-对象的创建&quot;&gt;2.1 对象的创建&lt;/h4&gt;
+&lt;p&gt;虚拟机遇到一条new指令时，首先将去检查这个指令的参数是否能在常量池中定位到一个类的符号引用，并且检查这个符号引用代表的类是否已被加载、解析和初始化过。如果没有，那必须先执行相应的类加载过程。&lt;/p&gt;
+
+&lt;p&gt;在类加载检查通过后，接下来虚拟机将为新生对象分配内存。对象所需内存的大小在类加载完成后便可完全确定，为对象分配空间的任务等同于把一块确定大小的内存从Java堆中划分出来。假设Java堆中内存是绝对规整的，所有用过的内存都放在一边，空闲的内存放在另一边，中间放着一个指针作为分界点的指示器，那所分配内存就仅仅是把那个指针向空闲空间那边挪动一段与对象大小相等的距离，这种分配方式称为“指针碰撞”（Bump the Pointer）。如果Java堆中的内存并不是规整的，已使用的内存和空闲的内存相互交错，那就没有办法简单地进行指针碰撞了，虚拟机就必须维护一个列表，记录上哪些内存块是可用的，在分配的时候从列表中找到一块足够大的空间划分给对象实例，并更新列表上的记录，这种分配方式称为“空闲列表”（Free List）。选择哪种分配方式由Java堆是否规整决定，而Java堆是否规整又由所采用的垃圾收集器是否带有压缩整理功能决定。因此，在使用Serial、ParNew等带Compact过程的收集器时，系统采用的分配算法是指针碰撞，而使用CMS这种基于Mark-Sweep算法的收集器时，通常采用空闲列表。&lt;/p&gt;
+
+&lt;p&gt;除如何划分可用空间之外，还有另外一个需要考虑的问题是对象创建在虚拟机中是非常频繁的行为，即使是仅仅修改一个指针所指向的位置，在并发情况下也并不是线程安全的，可能出现正在给对象A分配内存，指针还没来得及修改，对象B又同时使用了原来的指针来分配内存的情况。解决这个问题有两种方案，一种是对分配内存空间的动作进行同步处理——实际上虚拟机采用CAS配上失败重试的方式保证更新操作的原子性；另一种是把内存分配的动作按照线程划分在不同的空间之中进行，即每个线程在Java堆中预先分配一小块内存，称为本地线程分配缓冲（Thread Local Allocation Buffer,TLAB）。哪个线程要分配内存，就在哪个线程的TLAB上分配，只有TLAB用完并分配新的TLAB时，才需要同步锁定。虚拟机是否使用TLAB，可以通过-XX：+/-UseTLAB参数来设定。&lt;/p&gt;
+
+&lt;p&gt;内存分配完成后，虚拟机需要将分配到的内存空间都初始化为零值（不包括对象头），如果使用TLAB，这一工作过程也可以提前至TLAB分配时进行。这一步操作保证了对象的实例字段在Java代码中可以不赋初始值就直接使用，程序能访问到这些字段的数据类型所对应的零值。&lt;/p&gt;
+
+&lt;p&gt;接下来，虚拟机要对对象进行必要的设置，例如这个对象是哪个类的实例、如何才能找到类的元数据信息、对象的哈希码、对象的GC分代年龄等信息。这些信息存放在对象的对象头（Object Header）之中。&lt;/p&gt;
+
+&lt;p&gt;在上面工作都完成之后，从虚拟机的视角来看，一个新的对象已经产生了，但从Java程序的视角来看，对象创建才刚刚开始——＜init＞方法还没有执行，所有的字段都还为零。所以，一般来说（由字节码中是否跟随invokespecial指令所决定），执行new指令之后会接着执行＜init＞方法，把对象按照程序员的意愿进行初始化，这样一个真正可用的对象才算完全产生出来。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;总结：虚拟机遇到一条new指令时，首先检查是否能在常量池中找到该类的符号引用，并且查看该类是否已被加载和初始化过，若没有，则执行类加载过程。类加载检查通过后，为对象分配内存，有两种分配方式，若堆是完全规整的，则采用指针碰撞，若不规整，则需要采用空闲列表方式。另外对象创建可能会遇到并发问题，有两种解决方案，一种是对分配空间动作进行同步处理，一种是把分配动作按照线程划分在不同空间中进行。内存分配完成后，则把分配的内存空间都初始化为零值，然后对对象进行必要的设置，比如该对象是哪个类的实例，如何找到类的元数据信息等，这些在对象的对象头中。上面动作完成后，虚拟机方面对象创建已经完成，但Java程序方面，还需要用＜init＞方法进行初始化，这样真正的对象才算创建出来。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;22-对象的内存布局&quot;&gt;2.2 对象的内存布局&lt;/h4&gt;
+
+&lt;p&gt;在HotSpot虚拟机中，对象在内存中存储的布局可以分为3块区域：对象头（Header）、实例数据（Instance Data）和对齐填充（Padding）。&lt;/p&gt;
+
+&lt;p&gt;HotSpot虚拟机的对象头包括两部分信息，第一部分用于存储对象自身的运行时数据，如哈希码（HashCode）、GC分代年龄、锁状态标志、线程持有的锁、偏向线程ID、偏向时间戳等，这部分数据的长度在32位和64位的虚拟机（未开启压缩指针）中分别为32bit和64bit，官方称它为“Mark Word”。&lt;/p&gt;
+
+&lt;p&gt;对象头的另外一部分是类型指针，即对象指向它的类元数据的指针，虚拟机通过这个指针来确定这个对象是哪个类的实例。并不是所有的虚拟机实现都必须在对象数据上保留类型指针，比如采用句柄访问就没有。另外，如果对象是一个Java数组，那在对象头中还必须有一块用于记录数组长度的数据。&lt;/p&gt;
+
+&lt;p&gt;第二部分实例数据部分是对象真正存储的有效信息，也是在程序代码中所定义的各种类型的字段内容。无论是从父类继承下来的，还是在子类中定义的，都需要记录起来。这部分的存储顺序会受到虚拟机分配策略参数（FieldsAllocationStyle）和字段在Java源码中定义顺序的影响。HotSpot虚拟机默认的分配策略为相同宽度的字段总是被分配到一起。在满足这个前提条件的情况下，在父类中定义的变量会出现在子类之前。&lt;/p&gt;
+
+&lt;p&gt;第三部分对齐填充并不是必然存在的，也没有特别的含义，它仅仅起着占位符的作用。由于HotSpot VM的自动内存管理系统要求对象起始地址必须是8字节的整数倍，因此用以补齐。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;总结：对象在内存可以分为3个部分：对象头、实例数据和对齐填充。对象头分两个部分，一部分用于存储对象自身的运行时数据，一部分存储类型指针，但采用句柄方式的虚拟机没有类型指针，直接指针方式才有。实例数据部分存储对象的有效信息，一般相同宽度的字段分配到一起，然后父类的变量在子类之前。第三部分对其填充非必要，因为HotSpot虚拟机要求对象必须是8字节的整数倍，所以用以补齐。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;23-对象的访问定位&quot;&gt;2.3 对象的访问定位&lt;/h4&gt;
+
+&lt;p&gt;我们的Java程序需要通过栈上的reference数据来操作堆上的具体对象。由于reference类型在Java虚拟机规范中只规定了一个指向对象的引用，并没有定义这个引用应该通过何种方式去定位、访问堆中的对象的具体位置，所以对象访问方式也是取决于虚拟机实现而定的。目前主流的访问方式有使用句柄和直接指针两种。&lt;/p&gt;
+
+&lt;p&gt;如果使用句柄访问的话，那么Java堆中将会划分出一块内存来作为句柄池，reference中存储的就是对象的句柄地址，而句柄中包含了对象实例数据与类型数据各自的具体地址信息，如图2-2所示。
+&lt;img src=&quot;/img/in-post/20180205jvm/jvm_handle.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;如果使用直接指针访问，那么Java堆对象的布局中就必须考虑如何放置访问类型数据的相关信息，而reference中存储的直接就是对象地址，如图2-3所示。
+&lt;img src=&quot;/img/in-post/20180205jvm/jvm_pointer.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这两种对象访问方式各有优势，使用句柄来访问的最大好处就是reference中存储的是稳定的句柄地址，在对象被移动（垃圾收集时移动对象是非常普遍的行为）时只会改变句柄中的实例数据指针，而reference本身不需要修改。使用直接指针访问方式的最大好处就是速度更快，它节省了一次指针定位的时间开销，由于对象的访问在Java中非常频繁，因此这类开销积少成多后也是一项非常可观的执行成本。就本书讨论的主要虚拟机Sun HotSpot而言，它是使用第二种方式进行对象访问的，但从整个软件开发的范围来看，各种语言和框架使用句柄来访问的情况也十分常见。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;总结：对象访问方式取决于虚拟机实现，主流的有两种：使用句柄和直接指针。
+句柄方式的话，句柄中存储的是对象的实例数据和对象类型数据的具体地址，栈中存储的是对象的句柄地址。直接指针方式的话，对象实例数据的对象头则包含对象类型数据的地址，而栈中存储的是对象实例数据的地址。两种方式各有优劣，句柄方式是因为栈中存储的是句柄地址，所以方便对象移动，而直接指针的好处则是速度快，HotSpot采用的是直接指针。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;3-outofmemoryerror异常&quot;&gt;3. OutOfMemoryError异常&lt;/h2&gt;
+
+&lt;p&gt;在Java虚拟机规范的描述中，除了程序计数器外，虚拟机内存的其他几个运行时区域都有发生OutOfMemoryError异常。&lt;/p&gt;
+&lt;h4 id=&quot;31-java堆溢出&quot;&gt;3.1 Java堆溢出&lt;/h4&gt;
+&lt;p&gt;Java堆内存的OOM(OutOfMemoryError的简写)异常是实际应用中常见的内存溢出异常情况。当出现Java堆内存溢出时，异常堆栈信息为“java.lang.OutOfMemoryError: Java heap space”。&lt;/p&gt;
+
+&lt;p&gt;要解决该异常，需要先用工具分析是内存泄露（Memory Leak）还是内存溢出（Memory Overflow）。若是内存溢出，则需要扩大虚拟机的堆参数（-Xmx与-Xms）。“-Xmx”代表可扩充的最大堆内存。“-Xms”为最小堆内存。&lt;/p&gt;
+
+&lt;h4 id=&quot;32-虚拟机栈和本地方法栈溢出&quot;&gt;3.2 虚拟机栈和本地方法栈溢出&lt;/h4&gt;
+&lt;p&gt;如果线程请求的栈深度大于虚拟机所允许的最大深度，将抛出StackOverflowError异常。如果虚拟机在扩展栈时无法申请到足够的内存空间，则抛出OutOfMemoryError异常。栈容量只由-Xss参数设定。&lt;/p&gt;
+
+&lt;p&gt;在单个线程下，无论是由于栈帧太大还是虚拟机栈容量太小，当内存无法分配的时候，虚拟机抛出的都是StackOverflowError异常。在多线程时才可能出现OutOfMemoryError异常。因此为了避免OOM异常，在不减少线程的情况下，可以通过减少最大堆和减少栈容量来换取更多的线程。&lt;/p&gt;
+
+&lt;h4 id=&quot;33-方法区和运行时常量池溢出&quot;&gt;3.3 方法区和运行时常量池溢出&lt;/h4&gt;
+&lt;p&gt;在JDK1.6及以前，当方法区和运行时常量池出现内存溢出时，异常堆栈信息为“java.lang.OutOfMemoryError: PermGen space”。 可以通过-XX：PermSize和-XX：MaxPermSize设置方法区大小。JDK1.7以后，运行时常量池从方法区（永久代）移除到了堆中，此方法不再对常量池适用。工作中经常造成方法区溢出的一个可能场景是经常动态生成大量Class文件。比如多个应用都需要很多的jar包，其实可以提取出公共的放到tomcat下，或者扩大方法区。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;总结：本章首先讲了Java运行时数据区域，主要包含程序计数器、虚拟机栈、本地方法栈、Java堆、方法区等部分。然后讲了HotSpot虚拟机对象的创建，对象的内存布局，对象的两种访问方式。最后讲了除了程序计数器以外的区域都会发生OutOfMemoryError异常，以及对应的解决方法。&lt;/strong&gt;&lt;/p&gt;
+</description>
+        <pubDate>Mon, 05 Feb 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2018/02/05/jvm_memory/</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/02/05/jvm_memory/</guid>
+        
+        <category>Java虚拟机</category>
+        
+        
+      </item>
     
       <item>
         <title>网络编程：TCP、UDP及Socket</title>
